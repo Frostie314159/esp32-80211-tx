@@ -7,6 +7,7 @@
 
 #include "nvs_flash.h"
 #include "string.h"
+#include "freedom_tx.h"
 
 /*
  * This is the (currently unofficial) 802.11 raw frame TX API,
@@ -79,7 +80,7 @@ void spam_task(void *pvParameter) {
 		if (seqnum[line] > 0xfff)
 			seqnum[line] = 0;
 
-		esp_wifi_80211_tx(WIFI_IF_AP, beacon_rick, sizeof(beacon_raw) + strlen(rick_ssids[line]), false);
+		esp_wifi_80211_tx_openmac(WIFI_IF_AP, beacon_rick, sizeof(beacon_raw) + strlen(rick_ssids[line]), false);
 
 		if (++line >= TOTAL_LINES)
 			line = 0;
